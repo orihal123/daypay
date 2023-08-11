@@ -26,8 +26,7 @@
   </div>
   <div class="form-group">
     <%= f.label :category_id, "収入のカテゴリー" %>
-    <%= f.text_field :category_id, class: "form-control", placeholder: "収入のカテゴリーを入力してください" %>
-    <%= f.collection_select(:category_id, Category.all, :id, :name, {}, { class: "select-box", id: "item-category" }) %>
+    <%= f.collection_select(:category_id, Category.all, :id, :name, {}, { class: "form-control", id: "item-category" }) %>
   </div>
   <div class="form-group">
     <%= f.label :income_amount, "収入額" %>
