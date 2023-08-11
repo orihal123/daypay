@@ -4,6 +4,7 @@ class Category2 < ActiveHash::Base
     { id: 2, name: '食費' },
     { id: 3, name: '外食' },
     { id: 4, name: '日用品' },
+    { id: 5, name: '交際費' },
     
     
   ]
