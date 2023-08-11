@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_11_015623) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_11_022602) do
+  create_table "incomes", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "income_amount", null: false
+    t.date "date", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reports", charset: "utf8mb4", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
