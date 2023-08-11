@@ -1,0 +1,21 @@
+<%= render partial: 'layouts/header' %>
+
+
+<%= form_with model: @budget, url: budgets_path, data: { turbo: false }, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :date, "予算", class: 'control-label' %>
+    <%= f.date_select :date, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :budget_amount, "収入額" %>
+    <%= f.text_field :budget_amount, class: "form-control", placeholder: "収入額を入力してください" %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.submit "送信", class: "btn btn-outline-success" %>
+  </div>
+<% end %>
+
+
+
+<%= render partial: 'layouts/footer' %>
