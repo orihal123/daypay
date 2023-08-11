@@ -5,6 +5,7 @@ class Category < ActiveHash::Base
     { id: 3, name: 'お小遣い' },
     { id: 4, name: 'その他' },
     
+    
   ]
 
   include ActiveHash::Associations
