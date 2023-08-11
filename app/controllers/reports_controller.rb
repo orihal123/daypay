@@ -1,4 +1,13 @@
 class ReportsController < ApplicationController
-  def index
+  
+
+
+  def new
+
+  end
+
+  def create
+    
   end
 end
+
