@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'reports/index'
+  root to: 'reports#index'
   
-  resources :reports, only: [:new]
+  resources :reports, only: [:index, :new]
+  resources :incomes, only: [:new, :create]
 end

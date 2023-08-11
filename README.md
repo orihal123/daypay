@@ -1,24 +1,51 @@
-# README
+## incomes Table
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+|Column             |Type       |Options          | 
+|------             |----       |-------          |
+|income_amount      |integer    |null: false      |
+|date               |date       |null: false      |
+|category_id        |integer    |null: false      |
 
-Things you may want to cover:
+### Association
 
-* Ruby version
+belongs_to report
 
-* System dependencies
 
-* Configuration
+## expenses Table
 
-* Database creation
+|Column             |Type       |Options          |
+|------             |----       |-------          |
+|expenses_amount    |integer    |null: false      |
+|date               |date       |null: false      |
+|category_id        |integer    |null: false      |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+belongs_to report
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## reports Table
 
-* ...
+|Column             |Type       |Options          |
+|------             |----       |-------          |
+|total_income       |integer    |null: false      |
+|total_amount       |integer    |null: false      |
+|date               |date       |null: false      |
+
+### Association
+
+has_many incomes
+has_many expenses
+has_many budgets
+
+
+## budgets Table
+
+|Column             |Type       |Options          |
+|------             |----       |-------          |
+|budgets_amount     |integer    |null: false      |
+|date               |date       |null: false      |
+
+### Association
+
+belongs_to report
