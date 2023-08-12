@@ -6,8 +6,8 @@
     <%= f.date_select :date, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :category_id, "支出のカテゴリー" %>
-    <%= f.collection_select(:category_id, Category2.all, :id, :name, {}, { class: "form-control", id: "item-category" }) %>
+    <%= f.label :category2_id, "支出のカテゴリー" %>
+    <%= f.collection_select(:category2_id, Category2.all, :id, :name, {}, { class: "form-control", id: "item-category" }) %>
   </div>
   <div class="form-group">
     <%= f.label :expense_amount, "支出額" %>
