@@ -1,5 +1,7 @@
 <%= render partial: 'layouts/header' %>
 
+
+
 <%= form_with model: @expense, url: expenses_path, data: { turbo: false }, local: true do |f| %>
   <div class="form-group">
     <%= f.label :date, "支出日", class: 'control-label' %>
