@@ -6,6 +6,9 @@
     <div class="col-lg-6 mx-auto">
 
       <div>あといくら使えんねん</div>
+      <h1 class="display-5 fw-bold text-body-emphasis">
+      <%=@today_budget - @total_expense_amount_today%>
+      </h1>
       <div>今日の支出の合計値</div>
       <%= @total_expense_amount_today%>
       <div>今日の予算</div>
@@ -41,15 +44,16 @@
       
 <div class="list-group list-group-flush border-bottom scrollarea">
   <% @expenses.each do |expense| %>
-    <a href="#" class="list-group-item list-group-item-action active py-3 lh-sm" aria-current="true">
+    <a href="#" class="list-group-item list-group-item-action py-3 lh-sm">
       <div class="d-flex w-100 align-items-center justify-content-between">
-        <strong class="mb-1"><%= expense.category2_id%></strong>
+        <strong class="mb-1"><%= expense.category2.name%></strong>
         <small>Wed</small>
       </div>
     <div class="col-10 mb-1 small"><%= expense.expense_amount %></div>
     </a>
     <% end %>
 </div>
+
           <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>
           <button class="btn btn-outline-secondary" type="button">Example button</button>
         </div>

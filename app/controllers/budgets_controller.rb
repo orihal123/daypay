@@ -9,11 +9,10 @@ class BudgetsController < ApplicationController
     if @budget.save
       redirect_to '/'
     else
-      flash.now[:error] = "予算の作成に失敗しました。"
+      flash.now[:error] = '予算の作成に失敗しました。'
       logger.error @budget.errors.full_messages.join(', ')  # エラーメッセージをログに表示
       render :new
     end
-
   end
 
   private
