@@ -79,3 +79,9 @@ gem 'bootstrap', '~> 5.2.3'
 gem 'jquery-rails'
 
 gem 'active_hash'
+
+gem 'pry-rails'
+
+group :development do
+  gem 'rubocop', require: false
+end
