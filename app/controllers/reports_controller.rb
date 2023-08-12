@@ -2,7 +2,7 @@ class ReportsController < ApplicationController
   
 
 
-  def new
+  def index
 
   end
 
