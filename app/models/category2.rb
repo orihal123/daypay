@@ -6,9 +6,9 @@ class Category2 < ActiveHash::Base
     { id: 4, name: '日用品' },
     { id: 5, name: '交際費' },
     
-    
   ]
 
   include ActiveHash::Associations
   has_many :expenses
+  
 end
