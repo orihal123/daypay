@@ -87,3 +87,4 @@ group :development do
 end
 
 gem 'chartkick'
+gem "simple_calendar", "~> 2.4"

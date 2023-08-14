@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   resources :incomes, only: [:new, :create]
   resources :expenses, only: [:new, :create]
   resources :budgets, only: [:new, :create]
+  resources :calendars, only: [:index]
+  
 
 end
