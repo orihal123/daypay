@@ -1,7 +1,12 @@
 <%= render partial: 'layouts/header' %>
 
-<%= month_calendar do |date| %>
-  <%= date %>
+<%= month_calendar(attribute: :date, events: @expenses) do |date, expenses| %>
+  <%= date.day %><br>
+  <%= @calendar_data[date] %><br><!-- カレンダー内に日付ごとの支出合計を表示 -->
+  <%= @calendar_budgets[date] %> <!-- カレンダー内に日付ごとの予算を表示 -->
 <% end %>
+
+<!-- 今日の予算と当日の支出合計を表示 -->
+<h2>今日の支出合計: <%= @total_expense_amount_today %></h2>
 
 <%= render partial: 'layouts/footer' %>
