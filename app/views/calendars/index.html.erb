@@ -1,5 +1,7 @@
 <%= render partial: 'layouts/header' %>
 
- 
+<%= month_calendar do |date| %>
+  <%= date %>
+<% end %>
 
 <%= render partial: 'layouts/footer' %>
