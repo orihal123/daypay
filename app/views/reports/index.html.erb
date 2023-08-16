@@ -7,12 +7,14 @@
 
       <div>あといくら使えんねん</div>
       <h1 class="display-5 fw-bold text-body-emphasis">
-      <%=@budget_per_day - @total_expense_amount_today%>
-      </h1>
-      <div>今日の支出の合計値</div>
+      <%=@budget_per_day - (@expense_per_day + @total_expense_amount_today)%>   </h1>
+      <div>日割りの支出</div>
+      <%= @expense_per_day%><br>
+      <div>今日の支出</div>
       <%= @total_expense_amount_today%>
       <div>今日の予算</div>
-      <%=@budget_per_day%>
+        <%=@budget_per_day%>
+    
 
   
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">

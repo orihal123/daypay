@@ -44,7 +44,7 @@ class CalendarsController < ApplicationController
     @expensedays.each do |expenseday|
       total_expense_amount = expenseday.expense_amount
       expense_per_day = (total_expense_amount / 3).round
-
+      
       (0..2).each do |day_offset|
         date = expenseday.date + day_offset.days
         @calendar_daydata[date] ||= 0  # 既にデータがある場合は上書きしないようにする

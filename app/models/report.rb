@@ -2,6 +2,7 @@ class Report < ApplicationRecord
   has_many :incomes
   has_many :expenses
   has_many :budgets
+  has_many :expense_days
 
   extend ActiveHash::Associations::ActiveRecordExtensions
 

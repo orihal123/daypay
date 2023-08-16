@@ -2,6 +2,7 @@
 
 <%= month_calendar(attribute: :date, events: @expenses) do |date, expenses| %>
   <%= date.day %><br>
+  <%= @calendar_data[date]%><br>
   <%= @calendar_daydata[date]%><br>
   <%= @calendar_budgets[date] %> <!-- カレンダー内に日付ごとの予算を表示 -->
   
