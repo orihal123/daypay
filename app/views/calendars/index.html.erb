@@ -1,6 +1,6 @@
 <%= render partial: 'layouts/header' %>
 
-<%= month_calendar(attribute: :date, events: @expenses) do |date, expenses| %>
+<%= month_calendar(attribute: :date) do |date| %>
   <%= date.day %><br>
   <%= @calendar_data[date]%><br>
   <%= @calendar_daydata[date]%><br>

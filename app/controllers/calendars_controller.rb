@@ -4,11 +4,12 @@ class CalendarsController < ApplicationController
 
     # 今日の支出の合計を計算
     @total_expense_amount_today = Expense.where(date: today).sum(:expense_amount)
+   
 
     @expenses = Expense.where(date: today)
 
     # カレンダー表示のための日付と支出データを用意
-    @calendar_data = {}
+    @calendar_data = {} 
     @calendar_budgets = {}
     @calendar_daydata = {}
 
@@ -56,6 +57,7 @@ class CalendarsController < ApplicationController
     (@expensedays.last.date + 1.day..today + 2.days).each do |date|
       @calendar_daydata[date] ||= 0
     end
-  end
+
+    
 end
 

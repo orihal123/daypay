@@ -59,6 +59,7 @@ class ReportsController < ApplicationController
       @calendar_daydata[date] ||= 0
     end
   end
+  
 end
 
 
