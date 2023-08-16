@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_11_075236) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_16_045927) do
   create_table "budgets", charset: "utf8mb4", force: :cascade do |t|
     t.integer "budget_amount", null: false
+    t.date "date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "expense_days", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "expense_amount", null: false
     t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -4,11 +4,9 @@ class ReportsController < ApplicationController
   def index
     today = Date.today
 
-    # 今日の支出の合計を計算
-    @total_expense_amount_today = Expense.where(date: today).sum(:expense_amount)
+    
 
-    # 収入と支出をそれぞれ日付に基づいて取得
-    @incomes = Income.where(date: today)
+
     @expenses = Expense.where(date: today)
 
     # カレンダー表示のための日付と支出データを用意
