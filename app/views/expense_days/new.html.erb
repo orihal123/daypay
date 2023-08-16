@@ -1,0 +1,23 @@
+<%= render partial: 'layouts/header' %>
+
+<%= form_with model: @expenseday, url: expense_days_path, data: { turbo: false }, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :date, "支出日", class: 'control-label' %>
+    <%= f.date_select :date, class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :expense_amount, "支出額" %>
+    <%= f.text_field :expense_amount, class: "form-control", placeholder: "支出額を入力してください" %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.submit "送信", class: "btn btn-outline-success" %>
+  </div>
+<% end %>
+
+
+
+
+
+<%= render partial: 'layouts/footer' %>
