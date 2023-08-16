@@ -1,5 +1,4 @@
 class ReportsController < ApplicationController
-  
   def index
     today = Date.today
 
@@ -23,16 +22,16 @@ class ReportsController < ApplicationController
     if @budgets.present?
       total_budget = @budgets.sum(:budget_amount)
       days_in_month = (today.end_of_month.day - @budgets.first.date.day + 1)
-      budget_per_day = (total_budget.to_f / days_in_month).to_i  # 小数点以下を切り捨て
+      budget_per_day = (total_budget.to_f / days_in_month).to_i # 小数点以下を切り捨て
       @budget_per_day = budget_per_day
 
       # 予算の登録日以前の日は０、登録日から月末まで等分して表示
       (today.beginning_of_month..today.end_of_month).each do |date|
-        if date < @budgets.first.date
-          @calendar_budgets[date] = 0
-        else
-          @calendar_budgets[date] = budget_per_day
-        end
+        @calendar_budgets[date] = if date < @budgets.first.date
+                                    0
+                                  else
+                                    budget_per_day
+                                  end
       end
     else
       # 予算が登録されていない場合、全ての日に0を設定
@@ -47,9 +46,9 @@ class ReportsController < ApplicationController
       total_expense_amount = expenseday.expense_amount
       expense_per_day = (total_expense_amount / 3).round
       @expense_per_day = expense_per_day
-      (0..2).each do |day_offset|
+      3.times do |day_offset|
         date = expenseday.date + day_offset.days
-        @calendar_daydata[date] ||= 0  # 既にデータがある場合は上書きしないようにする
+        @calendar_daydata[date] ||= 0 # 既にデータがある場合は上書きしないようにする
         @calendar_daydata[date] += expense_per_day
       end
     end
@@ -59,8 +58,4 @@ class ReportsController < ApplicationController
       @calendar_daydata[date] ||= 0
     end
   end
-  
 end
-
-
-
