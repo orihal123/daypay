@@ -1,12 +1,18 @@
 <%= render partial: 'layouts/header' %>
 
 
-
+<div class="container">
+<div class="col-auto">
+<div class="row align-items-center">
 <%= form_with model: @expense, url: expenses_path, data: { turbo: false }, local: true do |f| %>
-  <div class="form-group">
+  <div class="center-block">
+  <div class="w-70">
+  
+  <div class="form-group ">
     <%= f.label :date, "支出日", class: 'control-label' %>
     <%= f.date_select :date, class: 'form-control' %>
   </div>
+  
   <div class="form-group">
     <%= f.label :category2_id, "支出のカテゴリー" %>
     <%= f.collection_select(:category2_id, Category2.all, :id, :name, {}, { class: "form-control", id: "item-category" }) %>
@@ -19,7 +25,12 @@
   <div class="form-group">
     <%= f.submit "送信", class: "btn btn-outline-success" %>
   </div>
+  </div>
+   </div>
 <% end %>
+</div>
+</div>
+</div>
 
 
 
