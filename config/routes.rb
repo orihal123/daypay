@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   resources :welcomes, only: [:index]
   resources :reports, only: [:index, :new]
-  resources :incomes, only: [:new, :create]
   resources :expenses, only: [:new, :create]
   resources :expense_days, only: [:new, :create]
   resources :budgets, only: [:new, :create]

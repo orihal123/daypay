@@ -58,6 +58,6 @@ class CalendarsController < ApplicationController
       @calendar_daydata[date] ||= 0
     end
 
-    
+  end
 end
 
