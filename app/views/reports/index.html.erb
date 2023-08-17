@@ -74,7 +74,7 @@
       </div>
     </div>
     </div>
-<div class="container">
+    <div class="container">
       <div class="row align-items-md-stretch">
         <div class="col-md-6">
           <div class="h-100 p-5 bg-body-tertiary border rounded-3">
@@ -98,14 +98,11 @@
         <div class="col-md-6">
           <div class="h-100 p-5 bg-body-tertiary border rounded-3">
             <h2>Expense Today lists</h2>
-    
-        <!-- 他のカラムの表示 -->
-      
               <div class="list-group list-group-flush border-bottom scrollarea">
                 <% @expenses.each do |expense| %>
                   <a class="list-group-item list-group-item-action py-3 lh-sm">
                     <div class="d-flex w-100 align-items-center justify-content-between">
-                      <strong class="mb-1"><%= expense.category2.name %></strong>
+                      <strong class="mb-10"><%= expense.category2.name %></strong>
                       <small>ggg</small>
                     </div>
                     <div class="col-10 mb-1"><%= expense.expense_amount %></div>
@@ -115,6 +112,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>

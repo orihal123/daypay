@@ -4,7 +4,9 @@ class CreateExpenseDays < ActiveRecord::Migration[7.0]
       t.integer     :expense_amount,               null: false
       t.date        :date,                         null: false
 
+      t.integer      :selected_days, null: false, default: 0
+
       t.timestamps
     end
   end
-end
+endらいls

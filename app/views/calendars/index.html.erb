@@ -2,9 +2,9 @@
 
 <%= month_calendar(attribute: :date) do |date| %>
   <%= date.day %><br>
-  <p class="text-primary"><%= @calendar_data[date]%><br></p>
-  <%= @calendar_daydata[date]%><br>
-  <%= @calendar_budgets[date] %> <!-- カレンダー内に日付ごとの予算を表示 -->
+  <p class="text-danger"><%= @calendar_data[date]%><br></p>
+  <p class="text-muted"><%= @calendar_daydata[date]%><br></p>
+  <p class="text-primary"><%= @calendar_budgets[date] %><br></p>
   
 <% end %>
 

@@ -16,7 +16,6 @@ class ReportsController < ApplicationController
     Expense.where(date: today.beginning_of_month..today.end_of_month).group(:date).sum(:expense_amount).each do |date, expense_amount|
       @calendar_data[date] = expense_amount
     end
-
     # 予算の登録日から月末まで登録額を等分して表示
     @budgets = Budget.where(date: today.beginning_of_month..today.end_of_month)
     if @budgets.present?
@@ -42,15 +41,19 @@ class ReportsController < ApplicationController
 
     # ExpenseDayのデータを処理してカレンダーに追加
     @expensedays = ExpenseDay.where(date: today..today + 2.days)
+    @calendar_daydata = {}
+
     @expensedays.each do |expenseday|
+      next unless expenseday.selected_days > 0
+
       total_expense_amount = expenseday.expense_amount
-      expense_per_day = (total_expense_amount / 3).round
-      @expense_per_day = expense_per_day
-      3.times do |day_offset|
-        date = expenseday.date + day_offset.days
+      expense_per_day = (total_expense_amount / expenseday.selected_days).round
+
+      (expenseday.date..expenseday.date + expenseday.selected_days - 1).each do |date|
         @calendar_daydata[date] ||= 0 # 既にデータがある場合は上書きしないようにする
         @calendar_daydata[date] += expense_per_day
       end
+      @expense_per_day = expense_per_day
     end
 
     # 登録されていない日には0を設定

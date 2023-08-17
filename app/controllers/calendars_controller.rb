@@ -39,14 +39,16 @@ class CalendarsController < ApplicationController
       end
     end
 
-    # ExpenseDayのデータを処理してカレンダーに追加
     @expensedays = ExpenseDay.where(date: today..today + 2.days)
-    @expensedays.each do |expenseday|
-      total_expense_amount = expenseday.expense_amount
-      expense_per_day = (total_expense_amount / 3).round
+    @calendar_daydata = {}
 
-      3.times do |day_offset|
-        date = expenseday.date + day_offset.days
+    @expensedays.each do |expenseday|
+      next unless expenseday.selected_days > 0
+
+      total_expense_amount = expenseday.expense_amount
+      expense_per_day = (total_expense_amount / expenseday.selected_days).round
+
+      (expenseday.date..expenseday.date + expenseday.selected_days - 1).each do |date|
         @calendar_daydata[date] ||= 0 # 既にデータがある場合は上書きしないようにする
         @calendar_daydata[date] += expense_per_day
       end
@@ -56,5 +58,8 @@ class CalendarsController < ApplicationController
     (@expensedays.last.date + 1.day..today + 2.days).each do |date|
       @calendar_daydata[date] ||= 0
     end
+
+    # ここまでで計算された結果が @calendar_daydata 変数に入っています
+    # この @calendar_daydata をビューで表示するなどして利用できます
   end
 end
