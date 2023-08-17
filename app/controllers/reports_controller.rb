@@ -10,7 +10,6 @@ class ReportsController < ApplicationController
     # カレンダー表示のための日付と支出データを用意
     @calendar_data = {}
     @calendar_budgets = {}
-    @calendar_daydata = {}
 
     # 支出データを日付ごとに合計してカレンダーにセット
     Expense.where(date: today.beginning_of_month..today.end_of_month).group(:date).sum(:expense_amount).each do |date, expense_amount|
