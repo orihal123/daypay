@@ -1,22 +1,26 @@
 <%= render partial: 'layouts/header' %>
 
 <div class="container">
-<%= form_with model: @budget, url: budgets_path, data: { turbo: false }, local: true do |f| %>
-  <div class="form-group">
-    <%= f.label :date, "今月の予算", class: 'control-label' %>
-    <%= f.date_select :date, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :budget_amount, "予算額" %>
-    <%= f.text_field :budget_amount, class: "form-control", placeholder: "今月の予算を設定してください" %>
-  </div>
-  
-  <div class="form-group">
-    <%= f.submit "送信", class: "btn btn-outline-success" %>
-  </div>
-<% end %>
+  <%= form_with model: @budget, url: budgets_path, data: { turbo: false }, local: true do |f| %>
+    <div class="form-group">
+      <%= f.label :date, "今月の予算", class: 'control-label' %>
+      <%= f.date_select :date, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :budget_amount, "予算額" %>
+      <%= f.text_field :budget_amount, class: "form-control", placeholder: "今月の予算を設定してください" %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :selected_days, "選択日数" %>
+      <%= f.number_field :selected_days, class: "form-control", placeholder: "選択したい日数を入力してください" %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.submit "送信", class: "btn btn-outline-success" %>
+    </div>
+  <% end %>
 </div>
-
 
 
 <%= render partial: 'layouts/footer' %>

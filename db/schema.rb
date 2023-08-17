@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_045927) do
   create_table "expense_days", charset: "utf8mb4", force: :cascade do |t|
     t.integer "expense_amount", null: false
     t.date "date", null: false
+    t.integer "selected_days", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
