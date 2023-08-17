@@ -16,7 +16,6 @@ class ReportsController < ApplicationController
     Expense.where(date: today.beginning_of_month..today.end_of_month).group(:date).sum(:expense_amount).each do |date, expense_amount|
       @calendar_data[date] = expense_amount
     end
-
     # 予算の登録日から月末まで登録額を等分して表示
     @budgets = Budget.where(date: today.beginning_of_month..today.end_of_month)
     if @budgets.present?
