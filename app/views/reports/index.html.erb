@@ -1,13 +1,12 @@
 <%= render partial: 'layouts/header' %>
 
-  <div class="px-4 py-5 my-5 text-center">
-    <h1 class="display-5 fw-bold text-body-emphasis">あといくら？？？？</h1>
-    
+    <div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold text-body-emphasis"><%= @budget_per_day - (@expense_per_day + @total_expense_amount_today)%>円</h1>
+    <div class="px-4 py-5 my-5 text-center">
     <div class="col-lg-6 mx-auto">
 
       <div>あといくら使えんねん</div>
-<h1 class="display-5 fw-bold text-body-emphasis">
-</h1>
+
 <%= @budget_per_day - (@expense_per_day + @total_expense_amount_today)%> <!-- ここで今日の残り予算を表示 -->
 <div>日割りの支出</div>
 <%= @expense_per_day %><br>
@@ -17,7 +16,7 @@
 <%= @budget_per_day %> <!-- ここで予算を表示 -->
     </div>
   </div>
-
+<div class="container">
 <div class="row align-items-md-stretch">
   <div class="col-md-6">
       <div class="h-100 p-5 bg-body-tertiary border rounded-3">
@@ -63,6 +62,7 @@
           <button class="btn btn-outline-secondary" type="button">Example button</button>
         </div>
       </div>
+    </div>
     </div>
 
 <%= render partial: 'layouts/footer' %>

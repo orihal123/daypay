@@ -1,5 +1,5 @@
 <%= render partial: 'layouts/header' %>
-
+<div class="container">
 <%= form_with model: @expenseday, url: expense_days_path, data: { turbo: false }, local: true do |f| %>
   <div class="form-group">
     <%= f.label :date, "支出日", class: 'control-label' %>
@@ -15,6 +15,7 @@
     <%= f.submit "送信", class: "btn btn-outline-success" %>
   </div>
 <% end %>
+</div>
 
 
 

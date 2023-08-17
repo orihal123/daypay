@@ -5,8 +5,8 @@
 <div class="col-auto">
 <div class="row align-items-center">
 <%= form_with model: @expense, url: expenses_path, data: { turbo: false }, local: true do |f| %>
-  <div class="center-block">
-  <div class="w-70">
+  <div class="d-flex align-items-center">
+  <div class="w-75">
   
   <div class="form-group ">
     <%= f.label :date, "支出日", class: 'control-label' %>
