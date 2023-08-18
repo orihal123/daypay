@@ -1,26 +1,31 @@
 <%= render partial: 'layouts/header' %>
 
-
-<%= form_with model: @expenseday, url: expense_days_path, data: { turbo: false }, local: true do |f| %>
-  <div class="form-group">
-    <%= f.label :date, "支出日", class: 'control-label' %>
-    <%= f.date_select :date, class: 'form-control' %>
-  </div>
-  
-  <div class="form-group">
-    <%= f.label :expense_amount, "支出額" %>
-    <%= f.text_field :expense_amount, class: "form-control", placeholder: "支出額を入力してください" %>
-  </div>
-  
-  <div class="form-group">
-    <%= f.label :selected_days, "選択日数" %>
-    <%= f.select :selected_days, options_for_select((1..15).to_a), class: "form-control" %>
-  </div>
-  
-  <div class="form-group">
-    <%= f.submit "送信", class: "btn btn-outline-success" %>
-  </div>
-<% end %>
+<div class="container">
+  <%= form_with model: @expenseday, url: expense_days_path, data: { turbo: false }, local: true do |f| %>
+  <div class="d-flex align-items-center">
+  <div class="w-75">
+    <div class="form-group">
+      <%= f.label :date, "支出日", class: 'control-label' %>
+      <%= f.date_select :date, class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :expense_amount, "支出額" %>
+      <%= f.text_field :expense_amount, class: "form-control", placeholder: "支出額を入力してください" %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :selected_days, "選択日数" %>
+      <%= f.select :selected_days, options_for_select((1..15).to_a), class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.submit "送信", class: "btn btn-outline-success" %>
+    </div>
+    </div>
+    </div>
+  <% end %>
+</div>
 
 
 

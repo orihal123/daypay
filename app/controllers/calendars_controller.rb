@@ -57,6 +57,8 @@ class CalendarsController < ApplicationController
     # 登録されていない日には0を設定
     (@expensedays.last.date + 1.day..today + 2.days).each do |date|
       @calendar_daydata[date] ||= 0
+      @calendar_data[date] ||= 0
+      @calendar_budgets[date] ||= 0
     end
 
     # ここまでで計算された結果が @calendar_daydata 変数に入っています
