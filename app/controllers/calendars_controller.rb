@@ -6,7 +6,6 @@ class CalendarsController < ApplicationController
     @total_expense_amount_today = Expense.where(date: today).sum(:expense_amount)
 
     @expenses = Expense.where(date: today)
-
     # カレンダー表示のための日付と支出データを用意
     @calendar_data = {}
     @calendar_budgets = {}
@@ -23,6 +22,7 @@ class CalendarsController < ApplicationController
       total_budget = @budgets.sum(:budget_amount)
       days_in_month = (today.end_of_month.day - @budgets.first.date.day + 1)
       budget_per_day = (total_budget.to_f / days_in_month).to_i # 小数点以下を切り捨て
+      @budget_per_day = budget_per_day
 
       # 予算の登録日以前の日は０、登録日から月末まで等分して表示
       (today.beginning_of_month..today.end_of_month).each do |date|
@@ -51,6 +51,7 @@ class CalendarsController < ApplicationController
       (expenseday.date..expenseday.date + expenseday.selected_days - 1).each do |date|
         @calendar_daydata[date] ||= 0 # 既にデータがある場合は上書きしないようにする
         @calendar_daydata[date] += expense_per_day
+        @expense_per_day = expense_per_day
       end
     end
 
@@ -60,8 +61,18 @@ class CalendarsController < ApplicationController
       @calendar_data[date] ||= 0
       @calendar_budgets[date] ||= 0
     end
+    
+    @budget_differents = @budget_per_day - (@expense_per_day + @total_expense_amount_today)
+    
+    # 予算の変動に応じてカレンダーの予算を更新
+    if @budget_differents != 0
+      days_remaining = (today.end_of_month - today).to_i
+      daily_budget_change = (@budget_differents / days_remaining.to_f).to_i
 
-    # ここまでで計算された結果が @calendar_daydata 変数に入っています
-    # この @calendar_daydata をビューで表示するなどして利用できます
+      (today + 1.day..today.end_of_month).each do |date|
+        updated_budget = @calendar_budgets[date] + daily_budget_change
+        @calendar_budgets[date] = [updated_budget, 0].max
+      end
+    end
   end
 end
