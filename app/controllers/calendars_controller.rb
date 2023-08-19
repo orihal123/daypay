@@ -16,7 +16,11 @@ class CalendarsController < ApplicationController
 
     # 支出データを日付ごとに合計してカレンダーにセット
     Expense.where(date: today.beginning_of_month..today.end_of_month).group(:date).sum(:expense_amount).each do |date, expense_amount|
-      @calendar_data[date] = expense_amount
+      @calendar_data[date] = expense_amount || 0
+    end
+
+    (today.beginning_of_month..today.end_of_month).each do |date|
+      @calendar_data[date] ||= 0
     end
 
     # 予算の登録日から月末まで登録額を等分して表示
@@ -64,8 +68,7 @@ class CalendarsController < ApplicationController
     @expense_per_day = 0 if @expense_per_day.nil?
     @expense_per_day += @budget_differents
 
-    # 予算差を今日のカレンダーに反映
-    @calendar_budgets[today] ||= 0
+ 
 
     # 予算の変動に応じてカレンダーの予算を更新
     days_remaining = (today.end_of_month - today).to_i

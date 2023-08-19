@@ -88,14 +88,11 @@
           <% if @budget_per_day.present? && @expense_per_day.present? && @total_expense_amount_today.present? %>
             <% budget_difference = @budget_per_day - (@expense_per_day + @total_expense_amount_today) %>
             <% if budget_difference >= 1000 %>
-              <p>Your budget is positive by more than 1000 yen!</p>
-              <%= image_tag 'business_group_happy.png', alt: 'Positive Image', class: 'img-responsive' %>
+              <%= image_tag 'business_group_happy.png', alt: 'Positive Image', class: 'img-fluid' %>
             <% elsif budget_difference >= 0 %>
-              <p>Your budget is positive within 0 to 1000 yen.</p>
-              <%= image_tag 'document_aseru_businessman.png', alt: 'Neutral Image', class: 'img-responsive' %>
+              <%= image_tag 'document_aseru_businessman.png', alt: 'Neutral Image', class: 'img-fluid' %>
             <% else %>
-              <p>Your budget is negative.</p>
-              <%= image_tag 'kabu_chart_man_cry.png', alt: 'Negative Image', class: 'img-responsive' %>
+              <%= image_tag 'kabu_chart_man_cry.png', alt: 'Negative Image', class: 'img-fluid' %>
             <% end %>
           <% else %>
             <!-- 0の値がある場合の表示 -->
