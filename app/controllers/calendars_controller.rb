@@ -11,7 +11,6 @@ class CalendarsController < ApplicationController
     @calendar_budgets = {}
 
     @expense_per_day = 0 if @expense_per_day.nil?
-   
 
     # 支出データを日付ごとに合計してカレンダーにセット
     Expense.where(date: today.beginning_of_month..today.end_of_month).group(:date).sum(:expense_amount).each do |date, expense_amount|
@@ -45,6 +44,8 @@ class CalendarsController < ApplicationController
     end
 
 
+    
+
     @expensedays = ExpenseDay.where(date: Date.today)
     @calendar_daydata = {}
 
@@ -60,7 +61,7 @@ class CalendarsController < ApplicationController
         @expense_per_day = expense_per_day
       end
     end
-    
+
     @budget_differents = @budget_per_day - (@expense_per_day + @total_expense_amount_today)
 
     # 予算の変動に応じてカレンダーの予算を更新
@@ -69,7 +70,14 @@ class CalendarsController < ApplicationController
     (today + 1.day..today.end_of_month).each do |date|
       @calendar_budgets[date] = [@calendar_budgets[date] + daily_budget_change, 0].max
     end
+
+    # 今日までの支出と予算の差を計算
+    @total_budget_used = @budget_per_day * (today.day - 1) + @total_expense_amount_today
+    @budget_difference = @budget_per_day * (days_remaining - 1) - @total_budget_used
+
+
   end
+  
 
   private
 
@@ -79,14 +87,14 @@ class CalendarsController < ApplicationController
       total_budget = @budgets.sum(:budget_amount)
       days_in_month = (date.end_of_month - date.beginning_of_month).to_i + 1
       @budget_per_day = (total_budget.to_f / days_in_month).to_i
-      
+
       @calendar_budgets = {}
       (date.beginning_of_month..date.end_of_month).each do |d|
-        if d < date # 今日以前の日は前日の予算を使う
-          @calendar_budgets[d] = d < @budgets.first.date ? 0 : @budget_per_day
-        else # 今日以降の日は今日の予算を使う
-          @calendar_budgets[d] = @budget_per_day
-        end
+        @calendar_budgets[d] = if d < date # 今日以前の日は前日の予算を使う
+                                 d < @budgets.first.date ? 0 : @budget_per_day
+                               else # 今日以降の日は今日の予算を使う
+                                 @budget_per_day
+                               end
       end
     else
       @calendar_budgets = {}
