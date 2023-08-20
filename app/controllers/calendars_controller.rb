@@ -29,8 +29,6 @@ class CalendarsController < ApplicationController
       days_in_month = (today.end_of_month.day - @budgets.first.date.day + 1)
       budget_per_day = (total_budget.to_f / days_in_month).to_i # 小数点以下を切り捨て
       @budget_per_day = budget_per_day
-
-
       # 予算の登録日以前の日は０、登録日から月末まで等分して表示
       (today.beginning_of_month..today.end_of_month).each do |date|
         @calendar_budgets[date] = if date < @budgets.first.date
@@ -71,7 +69,6 @@ class CalendarsController < ApplicationController
     (today + 1.day..today.end_of_month).each do |date|
       @calendar_budgets[date] = [@calendar_budgets[date] + daily_budget_change, 0].max
     end
-
   end
 
   private
@@ -95,7 +92,6 @@ class CalendarsController < ApplicationController
       @calendar_budgets = {}
       (date.beginning_of_month..date.end_of_month).each do |d|
         @calendar_budgets[d] = 0
-
       end
     end
   end
