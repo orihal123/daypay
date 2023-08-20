@@ -47,13 +47,17 @@ class ReportsController < ApplicationController
 
       total_expense_amount = expenseday.expense_amount
       expense_per_day = (total_expense_amount / expenseday.selected_days).round
-      expense_per_day = 0 if expense_per_day.nil?  # expense_per_dayがnilの場合に0を代入
 
       (expenseday.date..expenseday.date + expenseday.selected_days - 1).each do |date|
         @calendar_daydata[date] ||= 0 # 既にデータがある場合は上書きしないようにする
         @calendar_daydata[date] += expense_per_day
       end
       @expense_per_day = expense_per_day
+    end
+
+    # 登録されていない日には0を設定
+    (@expensedays.last.date + 1.day..today + 2.days).each do |date|
+      @calendar_daydata[date] ||= 0
     end
   end
 end
