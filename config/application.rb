@@ -10,6 +10,7 @@ module Daypay
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    config.beginning_of_week = :sunday
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -20,3 +21,4 @@ module Daypay
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
+

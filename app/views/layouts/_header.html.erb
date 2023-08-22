@@ -1,13 +1,17 @@
 <div class="container">
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <div>  </div><br>
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-        <span class="h1">Daypay</span>
+        <span class="h1"style="text-danger">Daypay</span>
       </a>
 
       <ul class="nav nav-pills">
         <li class="nav-item">
          <%= link_to "Report", reports_path, class: "nav-link active" %>
          </li>
+          <li class="nav-item">
+          <%= link_to "Calender",calendars_path, class: "nav-link" %>
+        </li>
         <li class="nav-item">
           <%= link_to "Expense today", new_expense_path, class: "nav-link" %>
         </li>
@@ -17,10 +21,7 @@
         <li class="nav-item">
           <%= link_to "Budget", new_budget_path, class: "nav-link" %>
           </li>
-        <li class="nav-item">
-          <%= link_to "Calender",calendars_path, class: "nav-link" %>
-        </li>
-
+       
       </ul>
     </header>
   </div>

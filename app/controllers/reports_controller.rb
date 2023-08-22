@@ -1,47 +1,43 @@
 class ReportsController < ApplicationController
   def index
-
     today = Date.today
 
     @expenses_list = Expense.where(date: today)
-    #日々の支出を表示
+    # 日々の支出を表示
     @expenses = Expense.where(date: today).sum(:expense_amount)
-    #その他項目の日割りを表示
+    # その他項目の日割りを表示
     @expense_per_day = calculate_expense_per_day
 
     @per_day = @expense_per_day[today] || 0
     # 予算の表示
 
-
     @budget = calculate_budget_per_day
     @budget_per_day = @budget[today] || 0
-
   end
 
   private
 
-  
   def calculate_expense_per_day
     expense_data = ExpenseDay.all
     expense_per_day = {}
-  
+
     expense_data.each do |expense|
       date = expense.date
       amount = expense.expense_amount
       select_day = expense.selected_days || 1
 
-      daily_expense = amount.to_i / select_day 
-  
+      daily_expense = select_day > 0 ? amount.to_i / select_day : 0
+
       (0...select_day).each do |i|
         target_date = date + i.days
         expense_per_day[target_date] ||= 0
         expense_per_day[target_date] += daily_expense
       end
     end
-    
+
     expense_per_day
-    
   end
+
   def calculate_budget_per_day
     budget_data = Budget.group(:date).sum(:budget_amount)
     budget_per_day = {}
@@ -54,7 +50,7 @@ class ReportsController < ApplicationController
       registered_dates.each do |date|
         amount = budget_data[date]
         days_remaining = last_day_of_month - date.day + 1
-        per_day = amount / days_remaining  # 整数の除算を行う
+        per_day = amount / days_remaining # 整数の除算を行う
 
         # 登録日を含むように日割りを設定
         (0..days_remaining - 1).each do |offset|

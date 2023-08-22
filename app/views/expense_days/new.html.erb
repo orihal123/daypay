@@ -5,22 +5,22 @@
   <div class="d-flex align-items-center">
   <div class="w-75">
     <div class="form-group">
-      <%= f.label :date, "支出日", class: 'control-label' %>
+     <h3 class="my-0 fw-normal text-warning">Daily Expenses</h3>
       <%= f.date_select :date, class: 'form-control' %>
     </div>
     
     <div class="form-group">
-      <%= f.label :expense_amount, "支出額" %>
-      <%= f.text_field :expense_amount, class: "form-control", placeholder: "支出額を入力してください" %>
+      <%= f.label :expense_amount,"Amount" %>
+      <%= f.text_field :expense_amount, class: "form-control", placeholder: "How much will you spend?" %>
     </div>
     
     <div class="form-group">
-      <%= f.label :selected_days, "選択日数" %>
+      <%= f.label :selected_days, "how many days" %><br>
       <%= f.select :selected_days, options_for_select((1..15).to_a), class: "form-control" %>
-    </div>
+    </div><br>
     
     <div class="form-group">
-      <%= f.submit "送信", class: "btn btn-outline-success" %>
+      <%= f.submit "Submit", class: "btn btn-outline-primary" %>
     </div>
     </div>
     </div>

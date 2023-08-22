@@ -1,12 +1,28 @@
 <%= render partial: 'layouts/header' %>
 
+<div class = "container">
+<div class = "row">
+  <div class = "col-2">
+    <p class="text-danger">Expense today:</p>
+    <p class="text-warning">Daily expenses:</p>
+    <p class="text-secondary">Budget:</p>
+  </div>
+  <div class = "col-10">
+    <p>Remember to keep your daily expenses down! This is the starting point and the top!</p> 
+    <p>Buy only what you really need! just want? need? Make the right decision!</p>
+    <p>Live within your budget no matter what! Be strict with yourself and be kind to others!</p>
+  </div>
+  </div>
+</div>
+
+<div class = "container">
 <%= month_calendar(attribute: :date) do |date| %>
+
   <%= date.day %><br>
   <p class="text-danger"><%= @expense_data[date.to_date] || 0 %></p>
   <p class="text-warning"><%= @expense_per_day[date.to_date]|| 0 %></p>
   <p class="text-secondary"><%= @budget[date.to_date] || 0 %></p>
 <% end %>
+</div>
 
 <%= render partial: 'layouts/footer' %>
-
-

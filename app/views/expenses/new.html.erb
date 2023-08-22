@@ -7,23 +7,23 @@
 <%= form_with model: @expense, url: expenses_path, data: { turbo: false }, local: true do |f| %>
   <div class="d-flex align-items-center">
   <div class="w-75">
-  
+  <h3 class="my-0 fw-normal text-danger">Expenses</h3>
   <div class="form-group ">
-    <%= f.label :date, "支出日", class: 'control-label' %>
+    
     <%= f.date_select :date, class: 'form-control' %>
   </div>
   
   <div class="form-group">
-    <%= f.label :category2_id, "支出のカテゴリー" %>
+    <%= f.label :category2_id, "Category" %>
     <%= f.collection_select(:category2_id, Category2.all, :id, :name, {}, { class: "form-control", id: "item-category" }) %>
   </div>
   <div class="form-group">
-    <%= f.label :expense_amount, "支出額" %>
-    <%= f.text_field :expense_amount, class: "form-control", placeholder: "支出額を入力してください" %>
-  </div>
+    <%= f.label :expense_amount, "Amount" %>
+    <%= f.text_field :expense_amount, class: "form-control", placeholder: "How much will you spend?" %>
+  </div><br>
   
   <div class="form-group">
-    <%= f.submit "送信", class: "btn btn-outline-success" %>
+    <%= f.submit "Submit", class: "btn btn-outline-primary" %>
   </div>
   </div>
    </div>
