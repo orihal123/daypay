@@ -3,14 +3,8 @@
 <%= month_calendar(attribute: :date) do |date| %>
   <%= date.day %><br>
   <p class="text-danger"><%= @expense_data[date.to_date] || 0 %></p>
-    
-    <% if @expense_per_day[date.to_date].present? %>
-    <% @expense_per_day[date.to_date].each do |daily_expense| %>
-      <p class="text-danger"><%= daily_expense %></p>
-    <% end %>
-  <% end %>
-
-  <p class="text-danger"><%= @budget[date.to_date] || 0 %></p>
+  <p class="text-warning"><%= @expense_per_day[date.to_date]|| 0 %></p>
+  <p class="text-secondary"><%= @budget[date.to_date] || 0 %></p>
 <% end %>
 
 <%= render partial: 'layouts/footer' %>

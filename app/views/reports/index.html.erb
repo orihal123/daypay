@@ -9,7 +9,7 @@
         </div>
         
           <div class="card-body">
-            <h1 class="display-5 fw-bold text-body-emphasis"><%= @budget_per_day - (@expense_per_day + @total_expense_amount_today) %>円</h1>
+            <h1 class="display-5 fw-bold text-body-emphasis"><%= @budget_per_day - ( @expenses + @per_day ) %>円</h1>
             <ul class="list-unstyled mt-6 mb-4">
               <li>Don't spend more</li>
               <li>for your future!</li>
@@ -32,7 +32,7 @@
         </div>
         <div class="card-body">
         
-            <h1 class="card-title pricing-card-title"><%= @total_expense_amount_today %><small class="text-body-secondary fw-light">円</small></h1>
+            <h1 class="card-title pricing-card-title"><%= @expenses %><small class="text-body-secondary fw-light">円</small></h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>By saving money,</li>
               <li>we can develop</li>
@@ -49,7 +49,7 @@
           <h4 class="my-0 fw-normal">Daily Expense</h4>
         </div>
         <div class="card-body">
-            <h1 class="card-title pricing-card-title"><%= @expense_per_day %><small class="text-body-secondary fw-light">円</small></h1>
+            <h1 class="card-title pricing-card-title"><%= @per_day  %><small class="text-body-secondary fw-light">円</small></h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>Poor people are always saying, </li>
               <li>'Let's buy something </li>
@@ -66,7 +66,7 @@
         </div>
         <div class="card-body">
         
-            <h1 class="card-title pricing-card-title"><%= @budget_per_day %> <small class="text-body-secondary fw-light">円</small></h1>
+            <h1 class="card-title pricing-card-title"><%=@budget_per_day%> <small class="text-body-secondary fw-light">円</small></h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>Not exceeding</li>
               <li>your daily budget is</li>
@@ -85,8 +85,8 @@
     <div class="col-md-6">
       <div class="h-100 p-5 bg-body-tertiary border rounded-3">
         <div class="container">
-          <% if @budget_per_day.present? && @expense_per_day.present? && @total_expense_amount_today.present? %>
-            <% budget_difference = @budget_per_day - (@expense_per_day + @total_expense_amount_today) %>
+          <% if @budget_per_day.present? && @per_day.present? && @expenses.present? %>
+            <% budget_difference = @budget_per_day - (@per_day + @expenses) %>
             <% if budget_difference >= 1000 %>
               <%= image_tag 'business_group_happy.png', alt: 'Positive Image', class: 'img-fluid' %>
             <% elsif budget_difference >= 0 %>
@@ -106,7 +106,7 @@
       <div class="h-100 p-5 bg-body-tertiary border rounded-3">
         <h2>Expense Today lists</h2>
         <div class="list-group list-group-flush border-bottom scrollarea">
-          <% @expenses.each do |expense| %>
+          <% @expenses_list.each do |expense| %>
             <a class="list-group-item list-group-item-action py-3 lh-sm">
               <div class="d-flex w-100 align-items-center justify-content-between">
                 <strong class="mb-10"><%= expense.category2.name %></strong>
