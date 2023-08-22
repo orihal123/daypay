@@ -2,20 +2,9 @@
 
 <%= month_calendar(attribute: :date) do |date| %>
   <%= date.day %><br>
-  
-  <% if @calendar_data[date].present? %>
-    <p class="text-danger"><%= @calendar_data[date] %><br></p>
-  <% end %>
-  
-  <% if @calendar_daydata[date].present? %>
-    <p class="text-muted"><%= @calendar_daydata[date] %><br></p>
-  <% else %>
-    <p class="text-muted"><%= 0 %><br></p>
-  <% end %>
-  
-  <% if @calendar_budgets[date].present? %>
-    <p class="text-primary"><%= @calendar_budgets[date] %><br></p>
-  <% end %>
+  <p class="text-danger"><%= @expense_data[date.to_date] || 0 %></p>
+  <p class="text-warning"><%= @expense_per_day[date.to_date]|| 0 %></p>
+  <p class="text-secondary"><%= @budget[date.to_date] || 0 %></p>
 <% end %>
 
 <%= render partial: 'layouts/footer' %>
