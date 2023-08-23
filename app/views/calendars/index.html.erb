@@ -14,7 +14,7 @@
   </div>
   </div>
 </div>
-
+<%= @daily_budget %>
 <div class = "container">
 <%= month_calendar(attribute: :date) do |date| %>
 
@@ -24,5 +24,7 @@
   <p class="text-secondary"><%= @budget[date.to_date] || 0 %></p>
 <% end %>
 </div>
+
+<%=@new_budget_per_day %>
 
 <%= render partial: 'layouts/footer' %>
