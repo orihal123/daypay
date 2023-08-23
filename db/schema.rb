@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_16_045927) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_23_034452) do
+  create_table "budget_differences", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "budgetdifferences_amount", null: false
+    t.date "date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "budgets", charset: "utf8mb4", force: :cascade do |t|
     t.integer "budget_amount", null: false
     t.date "date", null: false
@@ -30,14 +37,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_045927) do
     t.integer "expense_amount", null: false
     t.date "date", null: false
     t.integer "category2_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "incomes", charset: "utf8mb4", force: :cascade do |t|
-    t.integer "income_amount", null: false
-    t.date "date", null: false
-    t.integer "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

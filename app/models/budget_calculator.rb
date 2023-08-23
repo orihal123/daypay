@@ -1,40 +1,5 @@
-class ReportsController < ApplicationController
-  def index
-    today = Date.today
-    date = ExpenseDay.first&.date || Date.today
-
-    @expenses_list = Expense.where(date: today)
-    # 日々の支出を表示
-    @expenses = Expense.where(date: today).sum(:expense_amount)
-    # その他項目の日割りを表示
-    @expense_per_day = calculate_expense_per_day
-
-    @per_day = @expense_per_day[today] || 0
-    # 予算の表示
-
-    # 予算
-    @budget = calculate_budget_per_day
-    @budget_per_day = @budget[date] || 0
-    
-
-
-    # 今月の最後の日付を計算
-    last_day_of_month = Date.today.end_of_month
-    days_remaining = last_day_of_month.day - today.day
-
-
-
-    (1..days_remaining).each do |days_offset|
-      next_day = today + days_offset.days
-      @budget[next_day] =  @differents_per_day.to_i
-    end
-
-   
-  end
-
-  private
-
-  def calculate_expense_per_day
+class BudgetCalculator
+  def self.calculate_expense_per_day
     expense_data = ExpenseDay.all
     expense_per_day = {}
 
@@ -55,7 +20,7 @@ class ReportsController < ApplicationController
     expense_per_day
   end
 
-  def calculate_budget_per_day
+  def self.calculate_budget_per_day
     budget_data = Budget.group(:date).sum(:budget_amount)
     budget_per_day = {}
 
@@ -80,4 +45,5 @@ class ReportsController < ApplicationController
 
     budget_per_day
   end
+  
 end

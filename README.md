@@ -23,7 +23,7 @@ belongs_to report
 
 belongs_to report
 
-
+<!-- 
 ## reports Table
 
 |Column             |Type       |Options          |
@@ -36,7 +36,7 @@ belongs_to report
 
 has_many incomes
 has_many expenses
-has_many budgets
+has_many budgets -->
 
 
 ## budgets Table
@@ -49,3 +49,14 @@ has_many budgets
 ### Association
 
 belongs_to report
+
+## budgetfifferences Table
+
+|Column             |Type       |Options          |
+|------             |----       |-------          |
+|budgetfifferences     |integer    |null: false      |
+|date               |date       |null: false      |
+
+### Association
+
+b
