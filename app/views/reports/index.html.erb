@@ -28,7 +28,7 @@
     <div class="col">
       <div class="card mb-4 rounded-3 shadow-sm">
         <div class="card-header py-3">
-          <h4 class="my-0 fw-normal">Expense Today</h4>
+          <h4 class="my-0 fw-normal text-danger">Expense Today</h4>
         </div>
         <div class="card-body">
         
@@ -46,7 +46,7 @@
     <div class="col">
       <div class="card mb-4 rounded-3 shadow-sm">
         <div class="card-header py-3">
-          <h4 class="my-0 fw-normal">Daily Expense</h4>
+          <h4 class="my-0 fw-normal text-warning">Daily Expense</h4>
         </div>
         <div class="card-body">
             <h1 class="card-title pricing-card-title"><%= @per_day  %><small class="text-body-secondary fw-light">円</small></h1>
@@ -62,7 +62,7 @@
     <div class="col">
       <div class="card mb-4 rounded-3 shadow-sm">
         <div class="card-header py-3">
-          <h4 class="my-0 fw-normal">Budget</h4>
+          <h4 class="my-0 fw-normal text-secondary">Budget</h4>
         </div>
         <div class="card-body">
         
@@ -109,12 +109,18 @@
           <% @expenses_list.each do |expense| %>
             <a class="list-group-item list-group-item-action py-3 lh-sm">
               <div class="d-flex w-100 align-items-center justify-content-between">
-                <strong class="mb-10"><%= expense.category2.name %></strong>
+                <strong class="mb-10 text-danger"><%= expense.category2.name %></strong>
               
               <h2 class="col-8 mb-1"><%= expense.expense_amount %></h2>
               </div>
             </a>
           <% end %>
+          <a class="list-group-item list-group-item-action py-3 lh-sm">
+              <div class="d-flex w-100 align-items-center justify-content-between">
+                <h6 class="my-0 fw-normal text-warning">Daily Expense</h6>
+              
+              <h2 class="col-8 mb-1"><%= @per_day  %></h2>
+              </div>
         </div>
       </div>
     </div>

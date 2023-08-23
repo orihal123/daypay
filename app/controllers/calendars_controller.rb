@@ -3,14 +3,11 @@ class CalendarsController < ApplicationController
     today = Date.today
     date = ExpenseDay.first&.date || Date.today
 
-
     @expense_data = Expense.group(:date).sum(:expense_amount)
     @expenses = @expense_data[today] || 0
 
- 
     @expense_per_day = calculate_expense_per_day
     @per_day = @expense_per_day[today] || 0
-
 
     @budget = calculate_budget_per_day
     @budget_per_day = @budget[date] || 0
@@ -47,8 +44,8 @@ class CalendarsController < ApplicationController
 
       (0...select_day).each do |i|
         target_date = date + i.days
-        expense_per_day[target_date] ||= 0 
-        expense_per_day[target_date] += daily_expense #
+        expense_per_day[target_date] ||= 0
+        expense_per_day[target_date] += daily_expense
       end
     end
 

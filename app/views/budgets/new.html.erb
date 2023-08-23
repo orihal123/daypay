@@ -4,6 +4,7 @@
   <%= form_with model: @budget, url: budgets_path, data: { turbo: false }, local: true do |f| %>
     <div class="form-group">
     <h3 class="my-0 fw-normal text-secondary ">Budgets</h3>
+    <p>Let's record the money that can be used this month!!</p>
 
       <%= f.date_select :date, class: 'form-control' %>
     </div>
