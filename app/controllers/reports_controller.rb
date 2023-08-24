@@ -4,30 +4,36 @@ class ReportsController < ApplicationController
     date = ExpenseDay.first&.date || Date.today
 
     @expenses_list = Expense.where(date: today)
-    # 日々の支出を表示
-    @expenses = Expense.where(date: today).sum(:expense_amount)
-    # その他項目の日割りを表示
-    @expense_per_day = calculate_expense_per_day
+    @expense_data = Expense.group(:date).sum(:expense_amount)
+    @expenses = @expense_data[today] || 0
+    @expenses_all = Expense.sum(:expense_amount) + ExpenseDay.sum(:expense_amount)
+    @budgets_all = Budget.sum(:budget_amount)
+    @differents = @budgets_all - @expenses_all
 
+    # 日割りした支出
+    @expense_per_day = calculate_expense_per_day
     @per_day = @expense_per_day[today] || 0
-    # 予算の表示
 
     # 予算
     @budget = calculate_budget_per_day
     @budget_per_day = @budget[date] || 0
     
+    @budget_difference = @budget_per_day - (@per_day + @expenses)
+
+# 今月の最後の日付を計算
+last_day_of_month = Date.today.end_of_month
+days_remaining = last_day_of_month.day - today.day + 1  # 当日も含むように修正
+
+# 当日からの日割り予算を計算し加算
+@differents_per_day = @differents / days_remaining.to_i
+
+(0..days_remaining-1).each do |days_offset|  # 当日も含むように修正
+  target_day = today + days_offset.days
+  @budget[target_day] = @differents_per_day.to_i
+end
 
 
-    # 今月の最後の日付を計算
-    last_day_of_month = Date.today.end_of_month
-    days_remaining = last_day_of_month.day - today.day
 
-
-
-    (1..days_remaining).each do |days_offset|
-      next_day = today + days_offset.days
-      @budget[next_day] =  @differents_per_day.to_i
-    end
 
    
   end
