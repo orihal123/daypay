@@ -2,43 +2,39 @@ class CalendarsController < ApplicationController
   def index
     today = Date.today
     date = ExpenseDay.first&.date || Date.today
-    
-   # 日々の支出
-@expense_data = Expense.group(:date).sum(:expense_amount)
-@expenses = @expense_data[today] || 0
-@expenses_all = Expense.sum(:expense_amount) + ExpenseDay.sum(:expense_amount)
-@budgets_all = Budget.sum(:budget_amount)
-@differents = @budgets_all - @expenses_all
 
-# 日割りした支出
-@expense_per_day = calculate_expense_per_day
-@per_day = @expense_per_day[today] || 0
+    # 日々の支出
+    @expense_data = Expense.group(:date).sum(:expense_amount)
+    @expenses = @expense_data[today] || 0
+    @expenses_all = Expense.sum(:expense_amount) + ExpenseDay.sum(:expense_amount)
+    @budgets_all = Budget.sum(:budget_amount)
+    @differents = @budgets_all - @expenses_all
 
-# 予算
-@budget = calculate_budget_per_day
-@budget_per_day = @budget[date] || 0
+    # 日割りした支出
+    @expense_per_day = calculate_expense_per_day
+    @per_day = @expense_per_day[today] || 0
 
-@budget_difference = @budget_per_day - (@per_day + @expenses)
+    # 予算
+    @budget = calculate_budget_per_day
+    @budget_per_day = @budget[date] || 0
 
-# 今月の最初の日付と最後の日付を計算
-first_day_of_month = Date.today.beginning_of_month
-last_day_of_month = Date.today.end_of_month
-days_remaining = last_day_of_month.day - today.day + 1  # 当日も含むように修正
+    @budget_difference = @budget_per_day - (@per_day + @expenses)
 
-# 当日からの日割り予算を計算し加算
-@differents_per_day = @differents / days_remaining.to_f
+    # 今月の最初の日付と最後の日付を計算
+    first_day_of_month = Date.today.beginning_of_month
+    last_day_of_month = Date.today.end_of_month
+    days_remaining = last_day_of_month.day - today.day + 1 # 当日も含むように修正
 
-(first_day_of_month..last_day_of_month).each do |target_day|
-  if target_day >= today
-    @budget[target_day] = @differents_per_day.to_i
-  else
-    @budget[target_day] = 0
-  end
-end
+    # 当日からの日割り予算を計算し加算
+    @differents_per_day = @differents / days_remaining.to_f
 
-  
-    
-    
+    (first_day_of_month..last_day_of_month).each do |target_day|
+      @budget[target_day] = if target_day >= today
+                              @differents_per_day.to_i
+                            else
+                              0
+                            end
+    end
   end
 
   private
@@ -89,5 +85,4 @@ end
 
     budget_per_day
   end
-  
 end

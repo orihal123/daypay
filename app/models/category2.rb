@@ -1,9 +1,9 @@
 class Category2 < ActiveHash::Base
   self.data = [
     { id: 1, name: '-----' },
-    { id: 2, name: 'food expenses' },
-    { id: 3, name: 'entertainment expenses' },
-    { id: 4, name: 'others' }
+    { id: 2, name: 'Food expenses' },
+    { id: 3, name: 'Entertainment expenses' },
+    { id: 4, name: 'Others' }
 
   ]
 

@@ -3,25 +3,57 @@
 <div class="container">
   <div class="px-4 py-5 my-5 text-center">
     <div class="col-lg-6 mx-auto">
-      <div class="card mb-4 rounded-3 shadow-sm border-primary">
-        <div class="card-header py-3 text-bg-primary border-primary">
-          <h2 class="my-0 fw-normal">can use</h2>
-        </div>
-        
+      <% if@differents_per_day - ( @expenses + @per_day )  >= 1000 %>
+        <div class="card mb-4 rounded-3 shadow-sm border-primary">
+          <div class="card-header py-3 text-bg-primary border-primary">
+            <h2 class="my-0 fw-normal">Keep it up!</h2>
+          </div>
           <div class="card-body">
-            <h1 class="display-5 fw-bold text-body-emphasis"><%= @budget_per_day - ( @expenses + @per_day ) %>円</h1>
+            <h1 class="display-5 fw-bold text-body-emphasis"><%= @differents_per_day - ( @expenses + @per_day ) %>円</h1>
             <ul class="list-unstyled mt-6 mb-4">
-              <li>Don't spend more</li>
-              <li>for your future!</li>
-              <li>Today's actions</li>
-              <li>create the future!</li>
+              <li>While you can count </li>
+              <li>your money</li>
+              <li>you're not really rich yet</li>
+            
             </ul>
           </div>
-      
-      </div>
+        </div>
+      <% elsif @differents_per_day - ( @expenses + @per_day ) >= 0 %>
+        <div class="card mb-4 rounded-3 shadow-sm border-success">
+          <div class="card-header py-3 text-bg-success border-success">
+            <h2 class="my-0 fw-normal">Be careful!</h2>
+          </div>
+          <div class="card-body">
+            <h1 class="display-5 fw-bold text-body-emphasis"><%= @differents_per_day - ( @expenses + @per_day ) %>円</h1>
+            <ul class="list-unstyled mt-6 mb-4">
+              <li>The biggest trick</li>
+              <li>to getting rich is</li>
+              <li> to have a little money first. </li>
+            </ul>
+          </div>
+        </div>
+      <% else %>
+        <div class="card mb-4 rounded-3 shadow-sm border-danger">
+          <div class="card-header py-3 text-bg-danger border-danger">
+            <h2 class="my-0 fw-normal">Watch your spending</h2>
+          </div>
+          <div class="card-body">
+            <h1 class="display-5 fw-bold text-body-emphasis"><%= @differents_per_day - ( @expenses + @per_day ) %>円</h1>
+            <ul class="list-unstyled mt-6 mb-4">
+              <li>Shall I tell you why </li>
+              <li>you have no money? </li>
+              <li>That's because you </li>
+              <li>can't just love money.</li>
+            </ul>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
+
+
+
 
 <div class="container">
   <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
@@ -85,8 +117,8 @@
     <div class="col-md-6">
       <div class="h-100 p-5 bg-body-tertiary border rounded-3">
         <div class="container">
-          <% if @budget_per_day.present? && @per_day.present? && @expenses.present? %>
-            <% budget_difference = @budget_per_day - (@per_day + @expenses) %>
+          <% if @differents_per_day.present? && @per_day.present? && @expenses.present? %>
+            <% budget_difference = @differents_per_day - (@per_day + @expenses) %>
             <% if budget_difference >= 1000 %>
               <%= image_tag 'business_group_happy.png', alt: 'Positive Image', class: 'img-fluid' %>
             <% elsif budget_difference >= 0 %>
@@ -109,22 +141,22 @@
           <% @expenses_list.each do |expense| %>
             <a class="list-group-item list-group-item-action py-3 lh-sm">
               <div class="d-flex w-100 align-items-center justify-content-between">
-                <strong class="mb-10 text-danger"><%= expense.category2.name %></strong>
-              
-              <h2 class="col-8 mb-1"><%= expense.expense_amount %></h2>
+                <h6 class="my-0 fw-normal text-danger"><%= expense.category2.name %></h6>
+                <h2 class="col-8 mb-1"><%= expense.expense_amount %></h2>
               </div>
             </a>
           <% end %>
-          <a class="list-group-item list-group-item-action py-3 lh-sm">
+          <a class="list-group-item list-group-item-action py-3 lh-sm"></a>
               <div class="d-flex w-100 align-items-center justify-content-between">
-                <h6 class="my-0 fw-normal text-warning">Daily Expense</h6>
-              
-              <h2 class="col-8 mb-1"><%= @per_day  %></h2>
+                <h6 class="my-0 fw-normal text-warning">　Daily Expense</h6>
+                <h2 class="col-8 mb-1"><%= @per_day  %></h2>
               </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
 
 <%= render partial: 'layouts/footer' %>

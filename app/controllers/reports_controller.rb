@@ -17,25 +17,20 @@ class ReportsController < ApplicationController
     # 予算
     @budget = calculate_budget_per_day
     @budget_per_day = @budget[date] || 0
-    
+
     @budget_difference = @budget_per_day - (@per_day + @expenses)
 
-# 今月の最後の日付を計算
-last_day_of_month = Date.today.end_of_month
-days_remaining = last_day_of_month.day - today.day + 1  # 当日も含むように修正
+    # 今月の最後の日付を計算
+    last_day_of_month = Date.today.end_of_month
+    days_remaining = last_day_of_month.day - today.day + 1 # 当日も含むように修正
 
-# 当日からの日割り予算を計算し加算
-@differents_per_day = @differents / days_remaining.to_i
+    # 当日からの日割り予算を計算し加算
+    @differents_per_day = @differents / days_remaining.to_i
 
-(0..days_remaining-1).each do |days_offset|  # 当日も含むように修正
-  target_day = today + days_offset.days
-  @budget[target_day] = @differents_per_day.to_i
-end
-
-
-
-
-   
+    (0..days_remaining - 1).each do |days_offset| # 当日も含むように修正
+      target_day = today + days_offset.days
+      @budget[target_day] = @differents_per_day.to_i
+    end
   end
 
   private
