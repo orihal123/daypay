@@ -45,5 +45,4 @@ class BudgetCalculator
 
     budget_per_day
   end
-  
 end
