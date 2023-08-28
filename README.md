@@ -23,21 +23,6 @@ belongs_to report
 
 belongs_to report
 
-<!-- 
-## reports Table
-
-|Column             |Type       |Options          |
-|------             |----       |-------          |
-|total_income       |integer    |null: false      |
-|total_amount       |integer    |null: false      |
-|date               |date       |null: false      |
-
-### Association
-
-has_many incomes
-has_many expenses
-has_many budgets -->
-
 
 ## budgets Table
 
