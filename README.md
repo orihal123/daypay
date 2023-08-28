@@ -1,47 +1,65 @@
-## incomes Table
-
-|Column             |Type       |Options          | 
-|------             |----       |-------          |
-|income_amount      |integer    |null: false      |
-|date               |date       |null: false      |
-|category_id        |integer    |null: false      |
-
-### Association
-
-belongs_to report
 
 
-## expenses Table
+# アプリケーション名	
+## Daypay
 
-|Column             |Type       |Options          |
-|------             |----       |-------          |
-|expenses_amount    |integer    |null: false      |
-|date               |date       |null: false      |
-|category_id        |integer    |null: false      |
+# アプリケーション概要	
+予算管理アプリ
+１日に使える額を計算することができる
 
-### Association
+# URL	
+https://daypay.onrender.com/
 
-belongs_to report
+# BASIC認証用
+ID :orihara
+
+PASS :keisuke
 
 
-## budgets Table
+# 利用方法	
+・月の予算を設定
 
-|Column             |Type       |Options          |
-|------             |----       |-------          |
-|budgets_amount     |integer    |null: false      |
-|date               |date       |null: false      |
+・支出を登録(外出時等の支出・スーパー等でのまとめ買いの支出)
 
-### Association
+・レポート・カレンダーで使える金額等を確認できる
 
-belongs_to report
+# アプリケーションを作成した背景	
+現在一般的に利用されている家計簿アプリにおいて、１日単位で予算を設定できるものは少ない。
+１日に使うことができる金額を把握することで、無駄な支出を抑え最終的には個人の資産形成に繋げていく。
 
-## budgetfifferences Table
+# 洗い出した要件	
+https://docs.google.com/spreadsheets/d/1epWfhrTKZireqa86WNnlre4HFy84YQ9XEMvQoxdQZjE/edit?usp=sharing
+ 
+ 
+# データベース設計	ER図を添付。
+[![Image from Gyazo](https://i.gyazo.com/d1ebe57c1d290d68970ed2f8c64676c1.png)](https://gyazo.com/d1ebe57c1d290d68970ed2f8c64676c1)
 
-|Column             |Type       |Options          |
-|------             |----       |-------          |
-|budgetfifferences     |integer    |null: false      |
-|date               |date       |null: false      |
+# 開発環境	
+フロントエンド：HTML CSS Bootstrap
 
-### Association
+バックエンド：Rails 7.0.7
 
-b
+テキストエディタ：VScode
+
+その他：Git/GitHub
+
+
+
+# 工夫したポイント	
+・継続的に利用できるようにシンプルな操作性
+
+・外出時にスマホでの登録を想定しレスポンシブデザインを採用
+
+・１日に使える予算に関しては登録日から月末までを自動分割
+
+・支出を２種類作ることによって、日々の外出時の支出に加えスーパー等でのまとめ買いの金額も等分できるようにし、より正確な１日の使える金額を表示
+
+# 改善点	
+・現在の仕様だと予算差（使える額）が記録されていない。
+
+→モデルを追加作成しデータを残すようにすれば、確認が可能でありユーザーの日々のモチベーションも上がるではないか
+
+
+
+# 制作時間	
+40時間
